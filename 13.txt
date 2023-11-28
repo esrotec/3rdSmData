@@ -1,0 +1,89 @@
+13. Write a program to implement all operations in a linked list( insertion and deletion). 
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = nullptr;
+
+void insertElement(int value) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+    cout << "Element inserted successfully.\n";
+}
+
+void deleteElement(int value) {
+    if (head == nullptr) {
+        cout << "List is empty. Cannot delete.\n";
+        return;
+    }
+
+    Node* temp = head;
+    Node* prev = nullptr;
+
+    while (temp != nullptr && temp->data != value) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == nullptr) {
+        cout << "Element not found in the list.\n";
+    } else {
+        if (prev == nullptr) {
+            head = temp->next;
+        } else {
+            prev->next = temp->next;
+        }
+
+        delete temp;
+        cout << "Element deleted successfully.\n";
+    }
+}
+
+void displayLinkedList() {
+    Node* temp = head;
+    cout << "Linked List elements: ";
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    int choice, value;
+
+    do {
+        cout << "\n1. Insert Element\n2. Delete Element\n3. Display Linked List\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the element to insert: ";
+                cin >> value;
+                insertElement(value);
+                break;
+            case 2:
+                cout << "Enter the element to delete: ";
+                cin >> value;
+                deleteElement(value);
+                break;
+            case 3:
+                displayLinkedList();
+                break;
+            case 4:
+                cout << "Exiting the program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please enter a valid option.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}

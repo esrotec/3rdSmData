@@ -1,0 +1,41 @@
+11. Write a program to implement first pattern matching algorithm. 
+#include <iostream>
+#include <string>
+using namespace std;
+
+int patternMatching(string text, string pattern) {
+    int n = text.length();
+    int m = pattern.length();
+
+    for (int i = 0; i <= n - m; i++) {
+        int j;
+        for (j = 0; j < m; j++)
+            if (text[i + j] != pattern[j])
+                break;
+
+        if (j == m)
+            return i; // Pattern found at index i
+    }
+
+    return -1; // Pattern not found
+}
+
+int main() {
+    string text, pattern;
+
+    cout << "Enter the text: ";
+    getline(cin, text);
+
+    cout << "Enter the pattern to find: ";
+    getline(cin, pattern);
+
+    int result = patternMatching(text, pattern);
+
+    if (result != -1) {
+        cout << "Pattern found at position " << result + 1 << endl;
+    } else {
+        cout << "Pattern not found in the text\n";
+    }
+
+    return 0;
+}

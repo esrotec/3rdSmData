@@ -1,0 +1,63 @@
+14. Write a program to implement all operations in stack(insertion and deletion). 
+#include <iostream>
+using namespace std;
+
+const int MAX_SIZE = 10;
+int stack[MAX_SIZE];
+int top = -1;
+
+void push(int value) {
+    if (top < MAX_SIZE - 1) {
+        stack[++top] = value;
+        cout << "Element pushed onto the stack.\n";
+    } else {
+        cout << "Stack overflow. Cannot push more elements.\n";
+    }
+}
+
+void pop() {
+    if (top >= 0) {
+        cout << "Popped element: " << stack[top--] << endl;
+    } else {
+        cout << "Stack underflow. Cannot pop from an empty stack.\n";
+    }
+}
+
+void displayStack() {
+    cout << "Stack elements: ";
+    for (int i = top; i >= 0; i--) {
+        cout << stack[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int choice, value;
+
+    do {
+        cout << "\n1. Push Element\n2. Pop Element\n3. Display Stack\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the element to push: ";
+                cin >> value;
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                displayStack();
+                break;
+            case 4:
+                cout << "Exiting the program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please enter a valid option.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
